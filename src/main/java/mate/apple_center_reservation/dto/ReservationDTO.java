@@ -15,13 +15,13 @@ import java.time.LocalTime;
 @AllArgsConstructor //모든 필드를 매개변수로 하는 생성자
 public class ReservationDTO {
     private Long id;
-    private Long elderly_id;
+    private Long elderly_id;// ElderlyDTO.id
     private String relation;
     private ReservationType reservationType;
     private LocalDate reservationDate;
     private LocalTime reservationTime;
     private MealType meal;
     private String request;
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
+    private LocalDateTime createdDate;
+    private LocalDateTime updatedDate;
 }
