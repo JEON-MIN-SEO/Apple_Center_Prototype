@@ -16,7 +16,7 @@ import java.time.LocalTime;
 public class ReservationDTO {
     private Long id;
     private Long elderly_id;// ElderlyDTO.id
-    private String relation;
+    private String guardian_relation;
     private ReservationType reservationType;
     private LocalDate reservationDate;
     private LocalTime reservationTime;

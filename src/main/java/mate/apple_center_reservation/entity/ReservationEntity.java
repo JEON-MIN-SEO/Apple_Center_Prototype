@@ -31,7 +31,7 @@ public class ReservationEntity {
     private Long elderlyId;
 
     @Column(nullable = false)
-    private String relation;
+    private String guardian_relation;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
@@ -50,17 +50,11 @@ public class ReservationEntity {
     @Column
     private String request;
 
+    @CreatedDate //생성 시간 자동 입력
     @Column(nullable = false, updatable = false)
-    private LocalDateTime createdAt;
+    private LocalDateTime created_at;
 
+    @LastModifiedDate //수정 시간 자동 입력
     @Column(nullable = false)
-    private LocalDateTime updatedAt;
-
-    @CreatedDate
-    @Column(nullable = false, updatable = false)
-    private LocalDateTime createdDate;
-
-    @LastModifiedDate
-    @Column(nullable = false)
-    private LocalDateTime updateDate;
+    private LocalDateTime updated_at;
 }
