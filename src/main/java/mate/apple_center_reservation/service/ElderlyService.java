@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -19,6 +20,7 @@ public class ElderlyService {
         this.elderlyRepository = elderlyRepository;
     }
 
+    //입소자 명부 모두 가져오기
     public List<ElderlyDTO> getAllElderly() {
         List<ElderlyEntity> elderlyList = elderlyRepository.findAll();
         return elderlyList.stream()
@@ -26,8 +28,22 @@ public class ElderlyService {
                 .collect(Collectors.toList());
     }
 
-    public void createElderly(ElderlyDTO elderlyDTO) {
+    //입소자 명부 생성
+    public void saveElderly(ElderlyDTO elderlyDTO) {
         ElderlyEntity elderlyEntity = new ElderlyEntity(elderlyDTO.getId(), elderlyDTO.getName(), elderlyDTO.getFloor());
         elderlyRepository.save(elderlyEntity);
+    }
+
+    //입소자 명부 수정
+    public void updateElderly(Long id, ElderlyDTO elderlyDTO) {
+        Optional<ElderlyEntity> optionalElderlyEntity = elderlyRepository.findById(id);
+        if(optionalElderlyEntity.isPresent()) {
+            ElderlyEntity updateElderlyEntity = optionalElderlyEntity.get();
+            updateElderlyEntity.setName(elderlyDTO.getName());
+            updateElderlyEntity.setFloor(elderlyDTO.getFloor());
+            elderlyRepository.save(updateElderlyEntity);
+        } else {
+            throw new RuntimeException("수정이 불가합니다");
+        }
     }
 }

@@ -27,7 +27,14 @@ public class API_ElderlyController {
 
     @PostMapping("/elderly") //입소자 추가 API
     public ResponseEntity<Void> createElderly(@RequestBody ElderlyDTO elderlyDTO) {
-        elderlyService.createElderly(elderlyDTO);
+        elderlyService.saveElderly(elderlyDTO);
         return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Void> updateElderly(@PathVariable Long id, @RequestBody ElderlyDTO elderlyDTO) {
+        ElderlyDTO updateElderlyDTO = elderlyService.updateElderly(id, elderlyDTO);
+        return new ResponseEntity<>(HttpStatus.OK);
+
     }
 }
