@@ -2,6 +2,8 @@ package mate.apple_center_reservation.service;
 
 import mate.apple_center_reservation.dto.ElderlyDTO;
 import mate.apple_center_reservation.entity.ElderlyEntity;
+import mate.apple_center_reservation.exception.DeleteException;
+import mate.apple_center_reservation.exception.UpdateException;
 import mate.apple_center_reservation.repository.ElderlyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,13 +39,23 @@ public class ElderlyService {
     //입소자 명부 수정
     public void updateElderly(Long id, ElderlyDTO elderlyDTO) {
         Optional<ElderlyEntity> optionalElderlyEntity = elderlyRepository.findById(id);
-        if(optionalElderlyEntity.isPresent()) {
+        if (optionalElderlyEntity.isPresent()) {
             ElderlyEntity updateElderlyEntity = optionalElderlyEntity.get();
             updateElderlyEntity.setName(elderlyDTO.getName());
             updateElderlyEntity.setFloor(elderlyDTO.getFloor());
             elderlyRepository.save(updateElderlyEntity);
         } else {
-            throw new RuntimeException("수정이 불가합니다");
+            throw new UpdateException("수정이 불가합니다: 어르신 ID " + id + "를 찾을 수 없습니다.");
+        }
+    }
+
+    //입소자 명부 삭제
+    public void deleteElderly(Long id) {
+        Optional<ElderlyEntity> optionalElderlyEntity = elderlyRepository.findById(id);
+        if (optionalElderlyEntity.isPresent()) {
+            elderlyRepository.deleteById(id);
+        } else {
+            throw new DeleteException("삭제가 불가합니다: 어르신 ID " + id + "를 찾을 수 없습니다.");
         }
     }
 }

@@ -28,24 +28,24 @@ public class ReservationEntity {
     private Long id;
 
     @Column(nullable = false)
-    private Long elderlyId;
+    private Long elderly_Id;
 
     @Column(nullable = false)
     private String guardian_relation;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private ReservationType type;
+    private ReservationType type = ReservationType.DEFAULT; //기본값 설정
 
     @Column(nullable = false)
-    private LocalDate reservationDate;
+    private LocalDate reservation_date;
 
     @Column(nullable = false)
-    private LocalTime reservationTime;
+    private LocalTime reservation_time;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private MealType meal;
+    private MealType meal = MealType.DEFAULT; //기본값 설정
 
     @Column
     private String request;
