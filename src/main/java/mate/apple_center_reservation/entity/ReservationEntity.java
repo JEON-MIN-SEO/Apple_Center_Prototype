@@ -28,20 +28,20 @@ public class ReservationEntity {
     private Long id;
 
     @Column(nullable = false)
-    private Long elderly_Id;
+    private Long elderlyId;
 
     @Column(nullable = false)
-    private String guardian_relation;
+    private String guardianRelation;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private ReservationType type = ReservationType.DEFAULT; //기본값 설정
 
     @Column(nullable = false)
-    private LocalDate reservation_date;
+    private LocalDate reservationDate;
 
     @Column(nullable = false)
-    private LocalTime reservation_time;
+    private LocalTime reservationTime;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
@@ -52,9 +52,9 @@ public class ReservationEntity {
 
     @CreatedDate //생성 시간 자동 입력
     @Column(nullable = false, updatable = false)
-    private LocalDateTime created_at;
+    private LocalDateTime createdAt;
 
     @LastModifiedDate //수정 시간 자동 입력
     @Column(nullable = false)
-    private LocalDateTime updated_at;
+    private LocalDateTime updatedAt;
 }

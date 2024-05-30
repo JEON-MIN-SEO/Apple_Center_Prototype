@@ -21,17 +21,58 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(UpdateException.class)
-    public ResponseEntity<String> handleUpdateException(UpdateException ex) {
-        return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
+    public ResponseEntity<Map<String, String>> handleUpdateException(UpdateException ex) {
+        Map<String, String> errorDetails = new HashMap<>();
+        errorDetails.put("message", ex.getMessage());
+        errorDetails.put("cause", ex.getCause() != null ? ex.getCause().toString() : "No cause available");
+        return new ResponseEntity<>(errorDetails, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(DeleteException.class)
-    public ResponseEntity<String> handleDeleteException(DeleteException ex) {
-        return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
+    public ResponseEntity<Map<String, String>> handleDeleteException(DeleteException ex) {
+        Map<String, String> errorDetails = new HashMap<>();
+        errorDetails.put("message", ex.getMessage());
+        errorDetails.put("cause", ex.getCause() != null ? ex.getCause().toString() : "No cause available");
+        return new ResponseEntity<>(errorDetails, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(CreateException.class)
+    public ResponseEntity<Map<String, String>> handleCreateException(CreateException ex) {
+        Map<String, String> errorDetails = new HashMap<>();
+        errorDetails.put("message", ex.getMessage());
+        errorDetails.put("cause", ex.getCause() != null ? ex.getCause().toString() : "No cause available");
+        return new ResponseEntity<>(errorDetails, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(ReservationCreateException.class)
+    public ResponseEntity<Map<String, String>> handleReservationCreateException(ReservationCreateException ex) {
+        Map<String, String> errorDetails = new HashMap<>();
+        errorDetails.put("message", ex.getMessage());
+        errorDetails.put("cause", ex.getCause() != null ? ex.getCause().toString() : "No cause available");
+        return new ResponseEntity<>(errorDetails, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(NotFoundException.class)
+    public ResponseEntity<Map<String, String>> handleNotFoundException(NotFoundException ex) {
+        Map<String, String> errorDetails = new HashMap<>();
+        errorDetails.put("message", ex.getMessage());
+        errorDetails.put("cause", ex.getCause() != null ? ex.getCause().toString() : "No cause available");
+        return new ResponseEntity<>(errorDetails, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(FindException.class)
+    public ResponseEntity<Map<String, String>> handleFindException(FindException ex) {
+        Map<String, String> errorDetails = new HashMap<>();
+        errorDetails.put("message", ex.getMessage());
+        errorDetails.put("cause", ex.getCause() != null ? ex.getCause().toString() : "No cause available");
+        return new ResponseEntity<>(errorDetails, HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(Exception.class)
-    public ResponseEntity<String> handleAllExceptions(Exception ex) {
-        return new ResponseEntity<>("서버 오류가 발생했습니다: " + ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+    public ResponseEntity<Map<String, String>> handleAllExceptions(Exception ex) {
+        Map<String, String> errorDetails = new HashMap<>();
+        errorDetails.put("message", "서버 오류가 발생했습니다: " + ex.getMessage());
+        errorDetails.put("cause", ex.getCause() != null ? ex.getCause().toString() : "No cause available");
+        return new ResponseEntity<>(errorDetails, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }
